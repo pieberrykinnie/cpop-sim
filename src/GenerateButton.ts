@@ -11,8 +11,23 @@ class GenerateButton {
     }
     
     private handleGeneratePoints() {
-        const numberOfPoints = parseInt(prompt('Enter the number of points to generate:')!);
-        const points = this.pointGenerator.generatePoints(numberOfPoints);
+        const numberOfPoints: number = this.handleUserInput();
+        this.pointGenerator.generatePoints(numberOfPoints);
+    }
+
+    private handleUserInput(): number {
+        const userInput = prompt('Enter the number of points to generate:');
+        let numberOfPoints: number;
+
+        if (userInput === null) {
+            numberOfPoints = 0;
+        } else if (isNaN(parseInt(userInput))) {
+            numberOfPoints = 0;
+        } else {
+            numberOfPoints = parseInt(userInput);
+        }
+
+        return numberOfPoints;
     }
 }
 
